@@ -2812,7 +2812,6 @@ DDR2	Q16832	S	768	R	S768R	Likely Oncogenic	Likely Gain-of-function
 DDR2	Q16832	G	253	C	G253C	Oncogenic	Gain-of-function
 DDR2	Q16832	L	239	R	L239R	Oncogenic	Gain-of-function
 CASP8	Q14790	G	325	A	G325A	Likely Oncogenic	Gain-of-function
-CASP8	Q14790	CASP	8	L	CASP8L	Likely Oncogenic	Loss-of-function
 CASP8	Q14790	C	248	T	C248T	Likely Neutral	Neutral
 RET	P07949	C	634	W	C634W	Likely Oncogenic	Likely Gain-of-function
 RET	P07949	C	630	R	C630R	Oncogenic	Gain-of-function

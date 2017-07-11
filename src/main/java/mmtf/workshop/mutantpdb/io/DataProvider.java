@@ -1,6 +1,6 @@
 package mmtf.workshop.mutantpdb.io;
 
-import mmtf.workshop.mutantpdb.utils.SaprkUtils;
+import mmtf.workshop.mutantpdb.utils.SparkUtils;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 
@@ -9,28 +9,24 @@ import org.apache.spark.sql.Row;
  */
 public class DataProvider {
 
-    public Dataset<Row> getOncoKBMutations() {
-
-        Dataset<Row>  df = SaprkUtils.getSparkSession().read()
-                .format("com.databricks.spark.csv")
-                .option("delimiter", "\t")
-                .option("header", "true")
-                .load(DataLocationProvider.getOncoKBFileLocation())
+    public static Dataset<Row> getOncoKBMutations()
+    {
+        DataLocationProvider p = new DataLocationProvider();
+        Dataset<Row>  df = SparkUtils.readCSV(p.getOncoKBFileLocation(), "\t")
                 .select("Gene", "Uniprot", "Ref", "Position", "Varaint");
         return df;
     }
 
-    public Dataset<Row> getUniprotToPdbMapping() {
-        Dataset<Row>  df = SaprkUtils.getSparkSession().read()
-                .parquet(DataLocationProvider.getUniprotToPdbMappingLocation());
+    public static Dataset<Row> getUniprotToPdbMapping()
+    {
+        Dataset<Row>  df = SparkUtils.readParquet(DataLocationProvider.getUniprotToPdbMappingLocation());
         return df;
     }
 
-    public static Dataset<Row> getMutationsToStructures() {
-
-        DataLocationProvider p = new DataLocationProvider();
-        Dataset<Row>  df = SaprkUtils.getSparkSession().read()
-                .parquet(p.getMutationsFileLocation());
+    public static Dataset<Row> getMutationsToStructures()
+    {
+        Dataset<Row>  df = SparkUtils.getSparkSession().read()
+                .parquet(DataLocationProvider.getMutationsMappingLocation());
         return df;
     }
 

@@ -1,9 +1,7 @@
 package mmtf.workshop.mutantpdb.mappers;
 
-import mmtf.workshop.mutantpdb.utils.SaprkUtils;
 import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.broadcast.Broadcast;
-import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.rcsb.mmtf.api.StructureDataInterface;
 import scala.Tuple2;
@@ -13,8 +11,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static org.apache.spark.sql.functions.col;
 
 /**
  * Created by strokach on 28/06/17.

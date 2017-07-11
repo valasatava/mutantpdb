@@ -6,17 +6,18 @@ package mmtf.workshop.mutantpdb.io;
 public class DataLocationProvider {
 
     private final static String userHome = System.getProperty("user.home");
+    private static String uniprotToPdbMappingLocation = getUserHome() + "/spark/parquet/uniprotpdb/20170710/";
+    private static String mutationsMappingLocation = getUserHome() + "/spark/parquet/mutationsmapping";
 
-    private static String uniprotToPdbMappingLocation = getUserHome() + "/spark/parquet/uniprot-pdb/20161104/";
-    private static String mutationsMappingLocation = getUserHome() + "/spark/parquet/mutations";
-
-    private String getMutationsFile() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        return classLoader.getResource("mutations").getPath();
+    public static String getUserHome()
+    {
+        return userHome;
     }
 
-    public static String getUserHome() {
-        return userHome;
+    private String getMutationsFile()
+    {
+        ClassLoader classLoader = getClass().getClassLoader();
+        return classLoader.getResource("mutations").getPath();
     }
 
     public static String getUniprotToPdbMappingLocation() {
@@ -27,13 +28,25 @@ public class DataLocationProvider {
         return getMutationsFile();
     }
 
-    public static String getOncoKBFileLocation() {
-        return DataLocationProvider.class.getResource("oncokb_variants_missense.txt").getFile();
+    public String getOncoKBFileLocation()
+    {
+        ClassLoader classLoader = getClass().getClassLoader();
+        return classLoader.getResource("oncokb_variants_missense.txt").getPath();
     }
 
-    public static void main(String[] args) {
+    public static String getMutationsMappingLocation()
+    {
+        return mutationsMappingLocation;
+    }
 
-        System.out.println(DataLocationProvider.class.getResource("mutations").getPath());
+    public static void setMutationsMappingLocation(String mutationsMappingLocation)
+    {
+        DataLocationProvider.mutationsMappingLocation = mutationsMappingLocation;
+    }
 
+    public static void main(String[] args)
+    {
+        DataLocationProvider p = new DataLocationProvider();
+        System.out.println(p.getOncoKBFileLocation());
     }
 }

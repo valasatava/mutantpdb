@@ -1,0 +1,65 @@
+package mmtf.workshop.mutantpdb.utils;
+
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
+
+public class SparkUtils {
+	
+	private static int cores = Runtime.getRuntime().availableProcessors();
+	
+	private static SparkSession sparkSession=null;
+	
+	private static SparkConf conf=null;
+	private static JavaSparkContext sContext=null;
+	
+	public static JavaSparkContext getSparkContext() {
+
+		if (sContext==null) {
+			conf = new SparkConf()
+					.setMaster("local[" + cores + "]")
+					.setAppName("")
+					.set("spark.hadoop.validateOutputSpecs", "false");
+			sContext = new JavaSparkContext(conf);
+		}
+		return sContext;
+	}
+	
+	public static SparkSession getSparkSession() {
+
+		if (sparkSession==null) {
+			sparkSession = SparkSession
+					.builder()
+					.master("local[" + cores + "]")
+					.appName("app")
+					// the default in spark 2 seems to be 1g (see http://spark.apache.org/docs/latest/configuration.html) - JD 2016-10-06
+					.config("spark.driver.maxResultSize", "4g")
+					.config("spark.executor.memory", "4g")
+					.config("spark.debug.maxToStringFields", 80)
+					.getOrCreate();
+		}
+		return sparkSession;
+	}
+
+	public static void stopSparkSession() {
+		getSparkSession().stop();
+	}
+
+	public static Dataset<Row> readCSV(String path, String delimiter)
+	{
+		Dataset<Row> df = getSparkSession().read()
+				.format("com.databricks.spark.csv")
+				.option("delimiter", delimiter)
+				.option("header", "true")
+				.load(path);
+		return df;
+	}
+
+	public static Dataset<Row> readParquet(String path)
+	{
+		Dataset<Row> df = getSparkSession().read().parquet(path);
+		return df;
+	}
+}
