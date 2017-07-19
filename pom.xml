@@ -28,6 +28,8 @@
     <log4j.version>2.6.1</log4j.version>
     <spark.version>2.1.0</spark.version>
     <mmtf-spark.version>0.0.1-SNAPSHOT</mmtf-spark.version>
+    <uniprotormapping.version>2017.06.15.01</uniprotormapping.version>
+
   </properties>
 
   <dependencies>
@@ -37,6 +39,23 @@
       <artifactId>junit</artifactId>
       <version>3.8.1</version>
       <scope>test</scope>
+    </dependency>
+
+    <!-- UniProt OR mapping project -->
+    <dependency>
+      <groupId>org.rcsb.uniprot</groupId>
+      <artifactId>uniprot</artifactId>
+      <version>${uniprotormapping.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.hibernate.javax.persistence</groupId>
+          <artifactId>hibernate-jpa-2.0-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Spark dependency -->

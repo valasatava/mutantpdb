@@ -9,7 +9,7 @@ import static org.apache.spark.sql.functions.not;
 /**
  * Created by Yana Valasatava on 6/28/17.
  */
-public class App2 {
+public class MapMutationsToStructures {
 
     public static void main( String[] args )
     {

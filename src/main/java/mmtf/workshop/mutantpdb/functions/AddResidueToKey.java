@@ -1,4 +1,4 @@
-package mmtf.workshop.mutantpdb.mappers;
+package mmtf.workshop.mutantpdb.functions;
 
 import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.broadcast.Broadcast;

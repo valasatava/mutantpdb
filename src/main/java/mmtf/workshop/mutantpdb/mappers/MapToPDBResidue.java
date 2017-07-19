@@ -15,8 +15,8 @@ public class MapToPDBResidue implements Function<String, PDBResidue> {
         PDBResidue residue = new PDBResidue();
         residue.setPdbId(key.split(Pattern.quote("."))[0]);
         residue.setChainId(key.split(Pattern.quote("."))[1]);
-        residue.setResNumber(key.split(Pattern.quote("."))[2]);
-        residue.setAminoacidCode(key.split(Pattern.quote("."))[3]);
+        residue.setPdbResNumber(Integer.valueOf(key.split(Pattern.quote("."))[2]));
+        residue.setPdbResLetter(key.split(Pattern.quote("."))[3]);
         return residue;
     }
 }

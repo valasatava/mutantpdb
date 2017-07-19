@@ -23,6 +23,12 @@ public class DataProvider {
         return df;
     }
 
+    public static Dataset<Row> getUniprotToPdbMismatches()
+    {
+        Dataset<Row>  df = SparkUtils.readParquet(DataLocationProvider.getUniprotToPdbMismatchesLocation());
+        return df;
+    }
+
     public static Dataset<Row> getMutationsToStructures()
     {
         Dataset<Row>  df = SparkUtils.getSparkSession().read()
@@ -31,8 +37,7 @@ public class DataProvider {
     }
 
     public static void main(String[] args) {
-        
-        System.out.println();
-
+        Dataset<Row> df = getUniprotToPdbMismatches();
+        df.show();
     }
 }

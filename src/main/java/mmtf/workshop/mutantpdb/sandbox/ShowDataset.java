@@ -1,6 +1,6 @@
 package mmtf.workshop.mutantpdb.sandbox;
 
-import mmtf.workshop.mutantpdb.utils.SparkUtils;
+import mmtf.workshop.mutantpdb.io.DataProvider;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.slf4j.Logger;
@@ -15,9 +15,11 @@ public class ShowDataset {
 
     public static void main(String[] args)
     {
-        Dataset<Row>  df = SparkUtils.getSparkSession().read().parquet("/Users/yana/spark/parquet/uniprotpdb/20170710/");
-        df.cache();
+
+        Dataset<Row> mut = DataProvider.getOncoKBMutations();
+        mut.show();
+
+        Dataset<Row> df = DataProvider.getUniprotToPdbMismatches();
         df.show();
-        logger.info("Number of rows: "+df.count());
     }
 }

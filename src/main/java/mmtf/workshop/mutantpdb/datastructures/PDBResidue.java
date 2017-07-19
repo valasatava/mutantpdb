@@ -5,12 +5,13 @@ import java.io.Serializable;
 /**
  * Created by Yana Valasatava on 7/11/17.
  */
-public class PDBResidue implements Serializable {
+public class PDBResidue extends UniprotResidue implements Serializable {
 
     private String pdbId;
     private String chainId;
-    private String resNumber;
-    private String aminoacidCode;
+    private int pdbResNumber;
+    private String insCode;
+    private String pdbResLetter;
 
     public String getPdbId() {
         return pdbId;
@@ -28,19 +29,28 @@ public class PDBResidue implements Serializable {
         this.chainId = chainId;
     }
 
-    public String getResNumber() {
-        return resNumber;
+    public int getPdbResNumber() {
+        return pdbResNumber;
     }
 
-    public void setResNumber(String resNumber) {
-        this.resNumber = resNumber;
+    public void setPdbResNumber(int pdbResNumber) {
+        this.pdbResNumber = pdbResNumber;
     }
 
-    public String getAminoacidCode() {
-        return aminoacidCode;
+    public String getInsCode() {
+        return insCode;
     }
 
-    public void setAminoacidCode(String aminoacidCode) {
-        this.aminoacidCode = aminoacidCode;
+    public void setInsCode(String insCode) {
+        this.insCode = insCode;
     }
+
+    public String getPdbResLetter() {
+        return pdbResLetter;
+    }
+
+    public void setPdbResLetter(String pdbResLetter) {
+        this.pdbResLetter = pdbResLetter;
+    }
+
 }

@@ -7,6 +7,7 @@ public class DataLocationProvider {
 
     private final static String userHome = System.getProperty("user.home");
     private static String uniprotToPdbMappingLocation = getUserHome() + "/spark/parquet/uniprotpdb/20170710/";
+    private static String uniprotToPdbMismatchesLocation = getUserHome() + "/spark/parquet/uniprot_pdb_mismatches";
     private static String mutationsMappingLocation = getUserHome() + "/spark/parquet/mutationsmapping";
 
     public static String getUserHome()
@@ -14,18 +15,14 @@ public class DataLocationProvider {
         return userHome;
     }
 
-    private String getMutationsFile()
+    public static String getUniprotToPdbMappingLocation()
     {
-        ClassLoader classLoader = getClass().getClassLoader();
-        return classLoader.getResource("mutations").getPath();
-    }
-
-    public static String getUniprotToPdbMappingLocation() {
         return uniprotToPdbMappingLocation;
     }
 
-    public String getMutationsFileLocation() {
-        return getMutationsFile();
+    public static String getUniprotToPdbMismatchesLocation()
+    {
+        return uniprotToPdbMismatchesLocation;
     }
 
     public String getOncoKBFileLocation()
@@ -37,11 +34,6 @@ public class DataLocationProvider {
     public static String getMutationsMappingLocation()
     {
         return mutationsMappingLocation;
-    }
-
-    public static void setMutationsMappingLocation(String mutationsMappingLocation)
-    {
-        DataLocationProvider.mutationsMappingLocation = mutationsMappingLocation;
     }
 
     public static void main(String[] args)

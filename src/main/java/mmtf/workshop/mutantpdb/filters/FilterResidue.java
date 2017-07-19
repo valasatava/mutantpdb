@@ -1,12 +1,12 @@
-package mmtf.workshop.mutantpdb.mappers;
+package mmtf.workshop.mutantpdb.filters;
 
 import org.apache.spark.api.java.function.PairFunction;
-import org.biojava.nbio.structure.*;
-import org.rcsb.mmtf.api.StructureDataInterface;
+import org.biojava.nbio.structure.Chain;
+import org.biojava.nbio.structure.Group;
+import org.biojava.nbio.structure.Structure;
+import org.biojava.nbio.structure.StructureTools;
 import scala.Tuple2;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 

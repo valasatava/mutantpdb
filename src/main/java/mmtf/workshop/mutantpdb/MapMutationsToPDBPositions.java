@@ -20,6 +20,9 @@ public class MapMutationsToPDBPositions {
     public static Dataset<Row> run()
     {
         Dataset<Row> mutations = DataProvider.getOncoKBMutations();
+
+        //canonical = FilterUniprotCanonicalResidue(mutations);
+
         Dataset<Row> uniprotpdbmapping = DataProvider.getUniprotToPdbMapping();
         Dataset<Row> mutationsmapping = mutations.join(uniprotpdbmapping, mutations.col("Uniprot").equalTo(uniprotpdbmapping.col("uniProtId"))
                 .and(mutations.col("Position").equalTo(uniprotpdbmapping.col("uniProtPos"))))
