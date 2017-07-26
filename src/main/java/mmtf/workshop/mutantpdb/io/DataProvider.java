@@ -4,6 +4,8 @@ import mmtf.workshop.mutantpdb.utils.SparkUtils;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 
+import static org.apache.spark.sql.functions.col;
+
 /**
  * Created by Yana Valasatava on 6/28/17.
  */
@@ -29,6 +31,12 @@ public class DataProvider {
         return df;
     }
 
+    public static Dataset<Row> getUniprotToPdbWildType()
+    {
+        Dataset<Row>  df = SparkUtils.readParquet(DataLocationProvider.getUniprotToPdbWildTypeLocation());
+        return df;
+    }
+
     public static Dataset<Row> getMutationsToStructures()
     {
         Dataset<Row>  df = SparkUtils.getSparkSession().read()
@@ -37,7 +45,7 @@ public class DataProvider {
     }
 
     public static void main(String[] args) {
-        Dataset<Row> df = getUniprotToPdbMismatches();
-        df.show();
+        Dataset<Row> df = getUniprotToPdbWildType();
+        df.filter(col("uniprotId").equalTo("O60674")).show();
     }
 }

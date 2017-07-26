@@ -8,7 +8,10 @@ public class DataLocationProvider {
     private final static String userHome = System.getProperty("user.home");
     private static String uniprotToPdbMappingLocation = getUserHome() + "/spark/parquet/uniprotpdb/20170710/";
     private static String uniprotToPdbMismatchesLocation = getUserHome() + "/spark/parquet/uniprot_pdb_mismatches";
+    private static String uniprotToPdbWildTypeLocation = getUserHome() + "/spark/parquet/uniprot_wild_type";
     private static String mutationsMappingLocation = getUserHome() + "/spark/parquet/mutationsmapping";
+
+    private static String oncoKBMutationsInPDBResultsLocation = getUserHome() + "/Projects/mutantPDB/oncoKBMutationsInPDB";
 
     public static String getUserHome()
     {
@@ -36,9 +39,17 @@ public class DataLocationProvider {
         return mutationsMappingLocation;
     }
 
+    public static String getUniprotToPdbWildTypeLocation() {
+        return uniprotToPdbWildTypeLocation;
+    }
+
     public static void main(String[] args)
     {
         DataLocationProvider p = new DataLocationProvider();
         System.out.println(p.getOncoKBFileLocation());
+    }
+
+    public static String getOncoKBMutationsInPDBRResultsLocation() {
+        return oncoKBMutationsInPDBResultsLocation;
     }
 }
